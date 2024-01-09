@@ -1,8 +1,8 @@
 //
-//  ContentView.swift
+//  FirstView.swift
 //  QuizApp
 //
-//  Created by Martin Hegel on 04.01.24.
+//  Created by Martin Hegel on 09.01.24.
 //
 
 import SwiftUI
@@ -21,7 +21,8 @@ struct FirstView: View {
                 Image("LogoTransparent")
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 100, height: 100)
+                    .frame(width: 150, height: 150)
+                    .padding(.bottom, 50)
                 
                 HStack {
                     Button {
@@ -38,15 +39,17 @@ struct FirstView: View {
                     } label: {
                         Text("Sign up")
                     }
-                    .buttonStyle(.borderedProminent)
+                    .buttonStyle(.bordered)
                     .tint(Color("ButtonColor"))
                     .foregroundColor(.black)
                 }
+                .padding(.bottom, 100)
             }
         }
-        .background(Color("PrimaryColor"))
+        .background(Color("MainColor"))
     }
 }
+
 
 #Preview {
     FirstView()

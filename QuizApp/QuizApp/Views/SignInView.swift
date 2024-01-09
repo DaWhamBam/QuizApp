@@ -25,7 +25,7 @@ struct SignInView: View {
                    .frame(width: 150, height: 150)
                    .padding(.top, 200)
                
-               TextField("Name", text: $name)
+               TextField("E-Mail", text: $name)
                    .frame(width: 250, height: 30)
                    .background(Color.white)
                    .textFieldStyle(RoundedBorderTextFieldStyle())
