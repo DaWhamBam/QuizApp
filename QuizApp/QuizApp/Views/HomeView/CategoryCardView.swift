@@ -12,7 +12,7 @@ struct CategoryCardView: View {
         ZStack {
             
             VStack {
-                Image(category.categoryImage)
+                Image("CA_Books")
                     .resizable()
                     .scaledToFit()
                     .frame(maxWidth: 150, maxHeight: 150)
@@ -20,24 +20,25 @@ struct CategoryCardView: View {
                 
                 
                 VStack {
-                    Text(category.categoryName)
+                    Text(categoryViewModel.name)
                         .font(.title)
                     
-                    Text(category.categoryQuestionQty)
-                        .font(.headline)
+                    //Text(category.categoryQuestionQty)
+                        //.font(.headline)
                     
                 }
             }
         }
         
-        .frame(maxWidth: 150, maxHeight: 150)
+        .frame(maxWidth: .infinity, maxHeight: 150)
         .background(Color.gray)
         .cornerRadius(10.0)
     }
     
-    let category: Category
+    @ObservedObject var categoryViewModel: CategoryViewModel
+    
 }
 
 #Preview {
-    CategoryCardView(category: Category(categoryName: "Books", categoryQuestionQty: "15 Questions", categoryImage: "CA_Books"))
+    CategoryCardView(categoryViewModel: CategoryViewModel(category: Category(id: 12, name: "Books")))
 }

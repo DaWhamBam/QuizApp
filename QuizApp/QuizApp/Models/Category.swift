@@ -7,10 +7,11 @@
 
 import Foundation
 
-struct Category: Identifiable {
-    let id = UUID().uuidString
-    
-    var categoryName: String
-    var categoryQuestionQty: String
-    var categoryImage: String
+struct CategoryResult: Codable {
+    let trivia_categories: [Category]
+}
+
+struct Category: Codable {
+    let id: Int
+    let name: String
 }

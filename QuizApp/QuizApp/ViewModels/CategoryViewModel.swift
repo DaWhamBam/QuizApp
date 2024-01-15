@@ -2,17 +2,19 @@
 //  CategoryViewModel.swift
 //  QuizApp
 //
-//  Created by Martin Hegel on 10.01.24.
+//  Created by Martin Hegel on 15.01.24.
 //
 
 import Foundation
 
-@MainActor
-class CategoryViewModel: ObservableObject {
+class CategoryViewModel: ObservableObject, Identifiable {
     
-    @Published var categories = [Category]()
-    
-    func fetchCategories() {
-        categories = [Category(categoryName: "Books", categoryQuestionQty: "15", categoryImage: "CA_Books")]
+    init(category: Category) {
+        self.id = category.id 
+        self.name = category.name 
     }
+    
+    
+    let id: Int
+    @Published var name: String
 }

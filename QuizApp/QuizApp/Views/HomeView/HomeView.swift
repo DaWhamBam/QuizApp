@@ -9,11 +9,8 @@ import SwiftUI
 
 struct HomeView: View {
     
-    var category: [String] = ["Category 1", "Category 2"]
-    let numberOfColumn = 2
-    let columns = [GridItem(.fixed(150)),GridItem(.fixed(150))]
-    let space:Float = 0.0
-    
+    let columns = [GridItem(spacing: 50), GridItem()]
+
     var body: some View {
         
         NavigationStack {
@@ -84,27 +81,33 @@ struct HomeView: View {
                     
                     
                 }
-                
-                GeometryReader { proxy in
-                    ScrollView(.vertical) {
-                        LazyVGrid(columns: columns, spacing: 10, content: {
-                            ForEach(0 ..< numberOfColumn * 2) { item in
-                                CategoryCardView(category: Category(categoryName: "Books", categoryQuestionQty: "15 Questions", categoryImage: "CA_Books"))
-                                    .frame(width: CGFloat( getColumnWidth(width: Float(proxy.size.width))))
-                            }
-                        })
+                /*
+                List(categoryViewModel.categories, id: \.id) { category in
+                    VStack() {
+                        Text(category.name)
                     }
+                }
+                 */
+                
+               
+                    ScrollView {
+                        LazyVGrid(columns: columns, spacing: 50) {
+                            ForEach(categoryViewModel.categories) { category in
+                                NavigationLink {
+                                    Text(category.name)
+                                } label: {
+                                    CategoryCardView(categoryViewModel: category)
+                                }
+                            }
+                        }
                 }
             }
         }
     }
     
-    @StateObject private var categoryViewModel = CategoryViewModel()
+    @StateObject private var categoryViewModel = CategoryListViewModel()
     @Binding var tab: TabItem
     
-    func getColumnWidth(width: Float) -> Float {
-            ((width) - ((space)*Float(numberOfColumn-1))) / Float(numberOfColumn)
-        }
     
 }
 
