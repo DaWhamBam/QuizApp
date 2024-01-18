@@ -9,101 +9,110 @@ import SwiftUI
 
 struct HomeView: View {
     
-    let columns = [GridItem(spacing: 50), GridItem()]
-
+    let columns = [GridItem(spacing: 15), GridItem(spacing: 15)]
+    
     var body: some View {
         
         NavigationStack {
-            VStack{
-                HStack {
-                    VStack {
-                        Text("Hello Martin!")
-                            .bold()
-                            .font(.title)
-                            .padding(.leading, 16)
-                        Text("Let's start some Quiz!")
-                            .font(.headline)
-                            .padding(.leading, 24)
-                    }
-                    
-                    Spacer()
-                    
-                    
-                    Image("LogoTransparent")
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: 60, height: 60)
-                        .padding(.trailing, 16)
-                    
-                }
+            ZStack(alignment: .bottom) {
                 
-                // Spacer()
-                
-                HStack {
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 25.0)
-                            .foregroundColor(.blue)
-                            .frame(width: 250, height: 40)
-                        
-                        
-                        HStack {
-                            Text("Points:")
+                VStack{
+                    HStack {
+                        VStack {
+                            Text("Hello Martin!")
                                 .bold()
-                            //  .padding(.leading, 24)
-                            
-                            // Spacer()
-                            
-                            Text("2000")
-                            
+                                .font(.title)
+                                .padding(.leading, 72)
+                            Text("Let's start some Quiz!")
+                                .font(.headline)
+                                .padding(.leading, 80)
                         }
                         
-                    }
-                    // .padding(.leading, 40)
-                    
-                    Spacer()
-                    
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 25.0)
-                            .foregroundColor(.blue)
-                            .frame(width: 250, height: 40)
+                        Spacer()
                         
-                        HStack {
-                            Text("Rank:")
-                                .bold()
+                        Image("LogoTransparent")
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 60, height: 60)
+                            .padding(.trailing, 80)
+                    }
+                    
+                    Divider()
+                    
+                    HStack {
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 25.0)
+                                .foregroundColor(Color("SecondColor"))
+                                .frame(width: 250, height: 40)
+                                .shadow(radius: 5, x: 0, y: 4)
                             
                             
-                            Text("3521")
-                            
+                            HStack {
+                                Text("Points:")
+                                    .bold()
+                                
+                                Text("2000")
+                                
+                            }
                         }
                         
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 25.0)
+                                .foregroundColor(Color("SecondColor"))
+                                .frame(width: 250, height: 40)
+                                .shadow(radius: 5, x: 0, y: 4)
+                            
+                            HStack {
+                                Text("Rank:")
+                                    .bold()
+                                
+                                Text("3521")
+                                
+                            }
+                        }
                     }
-                    // .padding(.trailing, 32)
                     
+                    Divider()
+                        
                     
-                }
-                /*
-                List(categoryViewModel.categories, id: \.id) { category in
-                    VStack() {
-                        Text(category.name)
-                    }
-                }
-                 */
-                
-               
                     ScrollView {
-                        LazyVGrid(columns: columns, spacing: 50) {
+                        LazyVGrid(columns: columns, spacing: 10) {
                             ForEach(categoryViewModel.categories) { category in
                                 NavigationLink {
                                     Text(category.name)
                                 } label: {
                                     CategoryCardView(categoryViewModel: category)
+                                        .padding(.top, 30)
                                 }
                             }
                         }
+                    }
+                   .frame(width: .infinity)
+                   .padding(.horizontal, 70)
+                    
                 }
+                
+                Button {
+                    
+                } label: {
+                    Text("Custom Quiz")
+                        .font(.title2)
+                        .bold()
+                        .foregroundStyle(.black)
+                }
+                //.foregroundColor(.blue)
+                .frame(width: 300, height: 50)
+                .background(Color("SecondColor"))
+                .clipShape(Capsule())
+                .shadow(radius: 4, x: 0, y: 4)
+                .offset(y: -8)
+                
             }
+            .background(Color("PrimaryColor"))
         }
+        
     }
+    
     
     @StateObject private var categoryViewModel = CategoryListViewModel()
     @Binding var tab: TabItem
