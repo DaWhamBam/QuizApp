@@ -107,6 +107,7 @@ struct HomeView: View {
                 .shadow(radius: 4, x: 0, y: 4)
                 .offset(y: -8)
                 
+                
             }
             .background(Color("PrimaryColor"))
         }
