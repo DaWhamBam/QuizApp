@@ -11,7 +11,7 @@ struct QuizView: View {
     var body: some View {
         NavigationStack {
             VStack {
-
+                
                 HStack {
                     
                     HStack {
@@ -63,103 +63,15 @@ struct QuizView: View {
                 }
                 
                 HStack {
-                    ZStack {
-                        Button {
-                            
-                        }label: {
-                            Text("Antwort 1")
-                                .font(.title2)
-                                .foregroundStyle(.white)
-                                .padding()
-                                .fontWidth(.standard)
-                                .multilineTextAlignment(.center)
-                        }
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        .background(Color("FourthColor"))
-                        .cornerRadius(10.0)
-                        
-                        .padding(.leading, 10)
-                        .padding(.trailing, 2)
-                        // .padding(.vertical)
-                        .shadow(radius: 4, x: 0, y: 4)
-                        .onTapGesture(perform: {
-                            print("Antwort 1")
-                        })
-                    }
                     
-                    ZStack {
-                        Button {
-                            
-                        }label: {
-                            Text("Antwort 2")
-                                .font(.title2)
-                                .foregroundStyle(.white)
-                                .padding()
-                                .fontWidth(.standard)
-                                .multilineTextAlignment(.center)
-                        }
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        .background(Color("FourthColor"))
-                        .cornerRadius(10.0)
-                        
-                        .padding(.leading, 2)
-                        .padding(.trailing, 10)
-                        //.padding(.vertical)
-                        .shadow(radius: 4, x: 0, y: 4)
-                        .onTapGesture(perform: {
-                            print("Antwort 2")
-                        })
-                    }
+                    AnswerButtonLeft(buttonText: "Antwort 1")
+                    AnswerButtonRight(buttonText: "Antwort 2")
                 }
                 
                 HStack {
                     
-                    ZStack {
-                        Button {
-                            
-                        } label: {
-                            Text("Antwort 3")
-                                .font(.title2)
-                                .foregroundStyle(.white)
-                                .padding()
-                                .fontWidth(.standard)
-                                .multilineTextAlignment(.center)
-                        }
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        .background(Color("FourthColor"))
-                        .cornerRadius(10.0)
-                        .padding(.leading, 10)
-                        .padding(.trailing, 2)
-                        //  .padding(.vertical)
-                        .shadow(radius: 4, x: 0, y: 4)
-                        .onTapGesture(perform: {
-                            print("Antwort 3")
-                        })
-                        
-                    }
-                    
-                    ZStack {
-                        Button{
-                            
-                        }label: {
-                            Text("Antwort 4")
-                                .font(.title2)
-                                .foregroundStyle(.white)
-                                .padding()
-                                .fontWidth(.standard)
-                                .multilineTextAlignment(.center)
-                        }
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        .background(Color("FourthColor"))
-                        .cornerRadius(10.0)
-                        .padding(.leading, 2)
-                        .padding(.trailing, 10)
-                        //.padding(.vertical)
-                        .shadow(radius: 4, x: 0, y: 4)
-                        .onTapGesture(perform: {
-                            print("Antwort 4")
-                        })
-                    }
+                    AnswerButtonLeft(buttonText: "Antwort 3")
+                    AnswerButtonRight(buttonText: "Antwort 4")
                 }
                 
                 

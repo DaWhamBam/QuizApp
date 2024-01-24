@@ -7,10 +7,6 @@
 
 import SwiftUI
 
-
-
-
-
 struct ProgressBar: View {
     
     @State private var progress = 0.75
