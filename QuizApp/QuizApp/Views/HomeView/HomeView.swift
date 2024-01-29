@@ -91,8 +91,8 @@ struct HomeView: View {
                     
                 }
                 
-                Button {
-                    
+                NavigationLink {
+                    QuizView()
                 } label: {
                     Text("Custom Quiz")
                         .font(.title2)

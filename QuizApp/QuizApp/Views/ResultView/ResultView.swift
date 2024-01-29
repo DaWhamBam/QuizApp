@@ -13,28 +13,90 @@ struct ResultView: View {
     
     
     var body: some View {
-        VStack {
-            Image("Pokal")
-                .resizable()
-                .scaledToFill()
-                //.frame()
+        NavigationStack {
+            VStack {
+                Image("Pokal")
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 150, height: 150)
+                    .padding(.vertical, 16)
                 
-            CircleProgressbar(progress: progress)
-                //.frame()
-            
-            /*
-            Button("Reset") {
-            resetProgress()
+                ZStack {
+                    CircleProgressbar(progress: progress)
+                        .frame(maxHeight: .infinity)
+                    
+                    HStack {
+                        Text("23")
+                            .font(.title)
+                            .offset(y: -20)
+                            .bold()
+                        Text("/")
+                            .font(.largeTitle)
+                        Text("25")
+                            .font(.title)
+                            .offset(y: 20)
+                    }
+                    
+                }
+                
+                ZStack {
+                    Rectangle()
+                        .frame(width: .infinity, height: .infinity)
+                        .padding(.vertical)
+                        .shadow(radius: 4, x: 0, y: 4)
+                        .foregroundColor(Color("FourthColor"))
+                    
+                    HStack {
+                        Text("Punkte:")
+                            .font(.title)
+                            .bold()
+                            .foregroundStyle(.white)
+                        
+                        Text("20352")
+                            .font(.title)
+                            .bold()
+                            .foregroundStyle(.white)
+                    }
+                }
+                
+                Divider()
+                
+                ScrollView {
+                    
+                    ForEach(categoryViewModel.categories) { category in
+                        Text(category.name)
+                            .frame(maxWidth: .infinity)
+                            .foregroundColor(.white)
+                            .padding(12)
+                            .background(Color("FourthColor"))
+                            .clipShape(Capsule())
+                    }
+                    .padding(.bottom, 16)
+                    
+                }
+                
+                
             }
-            .buttonStyle(.borderedProminent)
-            */
-            
-            
+            .background(Color("PrimaryColor"))
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        
+                    } label: {
+                        Text("Save")
+                            .bold()
+                        Image(systemName: "square.and.arrow.down")
+                            .bold()
+                            .foregroundStyle(Color.blue)
+                    }
+                }
+            }
             
         }
     }
     
     
+    @StateObject private var categoryViewModel = CategoryListViewModel()
     
     func resetProgress() {
         progress = 0.36

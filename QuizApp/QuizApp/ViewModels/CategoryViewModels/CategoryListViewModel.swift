@@ -34,10 +34,10 @@ class CategoryListViewModel: ObservableObject {
             throw HTTPError.invalidURL
         }
         let (data, _) = try await URLSession.shared.data(from: url)
-        print(data)
+        //print(data)
         
         let result = try JSONDecoder().decode(CategoryResult.self, from: data)
-        print(result)
+       // print(result)
         
         return result.trivia_categories.map { category in
             CategoryViewModel(category: category)

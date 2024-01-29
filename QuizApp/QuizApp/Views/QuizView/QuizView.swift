@@ -9,7 +9,6 @@ import SwiftUI
 
 struct QuizView: View {
     var body: some View {
-        NavigationStack {
             VStack {
                 
                 HStack {
@@ -53,12 +52,22 @@ struct QuizView: View {
                         .shadow(radius: 4, x: 0, y: 4)
                         .foregroundColor(Color("FourthColor"))
                     
-                    Text("Hier steht eine sehr schwere Frage, oder? wie sieht es aus wenn ich mehr Text hier reinschreibe?")
+                    ScrollView{
+                        ForEach(questionViewModel.questions) { question in
+                            Text(question.question)
+                        }
+                    }
+                    
+                    
+                    
+                    /*
+                    Text(questionViewModel.questions.first?.question ?? "")
                         .font(.title2)
                         .foregroundStyle(.white)
                         .padding()
                         .fontWidth(.standard)
                         .multilineTextAlignment(.center)
+                    */
                     
                 }
                 
@@ -108,9 +117,10 @@ struct QuizView: View {
                 }
             }
             .background(Color("PrimaryColor"))
+            .navigationBarBackButtonHidden(true)
         }
         
-    }
+    @StateObject private var questionViewModel = QuestionListViewModel()
     
 }
 
