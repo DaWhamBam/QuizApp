@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct QuizView: View {
+    
     var body: some View {
             VStack {
                 
@@ -39,70 +40,66 @@ struct QuizView: View {
                     .padding(.horizontal, 16)
                     .padding(.bottom, 16)
                 
-                
-                
                 Divider()
                     .padding(.bottom, 8)
                 
-                ZStack {
+                if questionViewModel.currentQuestion != nil {
                     
-                    Rectangle()
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        .padding(.vertical)
-                        .shadow(radius: 4, x: 0, y: 4)
-                        .foregroundColor(Color("FourthColor"))
+                    let question = questionViewModel.currentQuestion!
                     
-                    ScrollView{
-                        ForEach(questionViewModel.questions) { question in
-                            Text(question.question)
-                        }
+                    
+                    ZStack {
+                        
+                        Rectangle()
+                            .frame(maxWidth: .infinity, maxHeight: .infinity)
+                            .padding(.vertical)
+                            .shadow(radius: 4, x: 0, y: 4)
+                            .foregroundColor(Color("FourthColor"))
+                        
+                        
+                        Text(question.question)
+                            .font(.title2)
+                            .foregroundStyle(.white)
+                            .padding()
+                            .fontWidth(.standard)
+                            .multilineTextAlignment(.center)
+                        
+                        
+                    }
+                    
+                    HStack {
+                        
+                        AnswerButtonLeft(buttonText: question.correct_answer)
+                        AnswerButtonRight(buttonText: question.incorrect_answers.first ?? "")
+                    }
+                    
+                    HStack {
+                        
+                        AnswerButtonLeft(buttonText: "Antwort 3")
+                        AnswerButtonRight(buttonText: "Antwort 4")
                     }
                     
                     
-                    
-                    /*
-                    Text(questionViewModel.questions.first?.question ?? "")
-                        .font(.title2)
-                        .foregroundStyle(.white)
-                        .padding()
-                        .fontWidth(.standard)
-                        .multilineTextAlignment(.center)
-                    */
-                    
+                    Button {
+                        
+                    } label: {
+                        Text("Prüfen")
+                            .bold()
+                            .font(.title2)
+                            .foregroundStyle(Color.black)
+                    }
+                    .frame(maxWidth: .infinity)
+                    .frame(height: 50)
+                    .background(Color("SecondColor"))
+                    .cornerRadius(10.0)
+                    .padding(.horizontal, 16)
+                    .padding(.bottom, 32)
+                    .padding(.top, 16)
+                    .shadow(radius: 4, x: 0, y: 4)
+                    .onTapGesture(perform: {
+                        print("Prüfen")
+                    })
                 }
-                
-                HStack {
-                    
-                    AnswerButtonLeft(buttonText: "Antwort 1")
-                    AnswerButtonRight(buttonText: "Antwort 2")
-                }
-                
-                HStack {
-                    
-                    AnswerButtonLeft(buttonText: "Antwort 3")
-                    AnswerButtonRight(buttonText: "Antwort 4")
-                }
-                
-                
-                Button {
-                    
-                } label: {
-                    Text("Prüfen")
-                        .bold()
-                        .font(.title2)
-                        .foregroundStyle(Color.black)
-                }
-                .frame(maxWidth: .infinity)
-                .frame(height: 50)
-                .background(Color("SecondColor"))
-                .cornerRadius(10.0)
-                .padding(.horizontal, 16)
-                .padding(.bottom, 32)
-                .padding(.top, 16)
-                .shadow(radius: 4, x: 0, y: 4)
-                .onTapGesture(perform: {
-                    print("Prüfen")
-                })
             }
             .navigationBarTitle("Category", displayMode: .inline)
             .toolbar {
@@ -121,6 +118,9 @@ struct QuizView: View {
         }
         
     @StateObject private var questionViewModel = QuestionListViewModel()
+    
+    
+    
     
 }
 

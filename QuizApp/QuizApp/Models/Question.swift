@@ -12,7 +12,7 @@ struct QuestionResult: Codable {
 }
 
 struct Question: Codable {
-    let id: Int
+    //let id: Int
     let difficulty: String
     let category: String
     let question: String
