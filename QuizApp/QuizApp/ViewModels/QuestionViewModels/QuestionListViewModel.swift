@@ -12,22 +12,25 @@ class QuestionListViewModel: ObservableObject {
     
     private var token: String? = nil
     var questions = [Question]()
-    @Published  var anwsers = [String]()
-    
+    @Published var answers = [String]()
+    @Published var currentQuestion: Question?
+    @Published private var selectedTab: TabItem = .home
+    @Published var isFinished = false
     
     
     
     init() {
         fetchData()
+      
     }
-    
-    @Published var currentQuestion: Question?
-    
+
     func fetchData() {
         Task {
             do {
                 self.questions = try await fetchQuestions()
                 self.currentQuestion = questions.first
+                fetchAnswers()
+                
             } catch {
                 print("Request failed with error: \(error)")
             }
@@ -37,7 +40,7 @@ class QuestionListViewModel: ObservableObject {
     private func fetchQuestions() async throws -> [Question] {
         self.token = try await fetchToken()
         
-        guard let token = self.token, let url = URL(string: "https://opentdb.com/api.php?amount=10&token=\(token)") else {
+        guard let token = self.token, let url = URL(string: "https://opentdb.com/api.php?amount=2&type=multiple&token=\(token)") else {
             throw HTTPError.invalidURL
         }
         let (data, _) = try await URLSession.shared.data(from: url)
@@ -62,5 +65,40 @@ class QuestionListViewModel: ObservableObject {
         print(result)
         
         return result.token
+    }
+    
+    
+    private func fetchAnswers() {
+        guard let currentQuestion = currentQuestion else {
+            return
+        } 
+        answers.append(currentQuestion.correct_answer)
+        answers.append(contentsOf: currentQuestion.incorrect_answers)
+        answers.shuffle()
+    }
+    
+    func nextQuestion() {
+        if questions.isEmpty {
+            return
+        } else {
+            questions.remove(at: 0)
+            self.currentQuestion = questions.first
+            answers.removeAll()
+            fetchAnswers()
+        }
+    }
+    
+    func endGame() {
+        
+        if questions.count <= 1 {
+            
+           isFinished = true
+          
+        } else {
+            
+            nextQuestion()
+            
+        }
+        
     }
 }

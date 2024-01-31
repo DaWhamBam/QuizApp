@@ -9,8 +9,6 @@ import SwiftUI
 
 struct HomeView: View {
     
-    let columns = [GridItem(spacing: 15), GridItem(spacing: 15)]
-    
     var body: some View {
         
         NavigationStack {
@@ -92,7 +90,7 @@ struct HomeView: View {
                 }
                 
                 NavigationLink {
-                    QuizView()
+                    WrapperQuizView()
                 } label: {
                     Text("Custom Quiz")
                         .font(.title2)
@@ -116,6 +114,7 @@ struct HomeView: View {
     
     @StateObject private var categoryViewModel = CategoryListViewModel()
     @Binding var tab: TabItem
+    let columns = [GridItem(spacing: 15), GridItem(spacing: 15)]
     
     
 }

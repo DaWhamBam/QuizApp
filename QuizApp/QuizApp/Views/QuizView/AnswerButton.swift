@@ -7,11 +7,13 @@
 
 import SwiftUI
 
-struct AnswerButtonLeft: View {
+struct AnswerButton: View {
     @State var buttonText: String
     
     var body: some View {
         Button {
+            
+            self.didTap = DidTap()
             
         } label: {
             Text(buttonText)
@@ -22,16 +24,30 @@ struct AnswerButtonLeft: View {
                 .multilineTextAlignment(.center)
                 .background(.white.opacity(0.0001))
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .frame(minHeight: 150)
         }
         
-        .background(Color("FourthColor"))
+        .background(didTap ? Color("ThirdColor") : Color("FourthColor"))
         .cornerRadius(10.0)
-        .padding(.leading, 10)
-        .padding(.trailing, 2)
+       // .padding(.leading, 5)
+        //.padding(.trailing, 5)
         .shadow(radius: 4, x: 0, y: 4)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
+    
+    @State private var didTap: Bool = false
+    
+    func DidTap() -> Bool {
+        if self.didTap == false {
+            return true
+        } else {
+            return false
+        }
+        
+    }
+    
 }
 
 #Preview {
-    AnswerButtonLeft(buttonText: "Antwort 1")
+    AnswerButton(buttonText: "Antwort 1")
 }

@@ -10,6 +10,11 @@ import SwiftUI
 struct QuizView: View {
     
     var body: some View {
+        ZStack {
+            
+            Color("MainColor")
+                .ignoresSafeArea()
+            
             VStack {
                 
                 HStack {
@@ -33,6 +38,7 @@ struct QuizView: View {
                             .padding(.trailing, 16)
                     }
                 }
+                
                 .padding(.top, 16)
                 
                 ProgressBar()
@@ -51,7 +57,7 @@ struct QuizView: View {
                     ZStack {
                         
                         Rectangle()
-                            .frame(maxWidth: .infinity, maxHeight: .infinity)
+                            .frame(maxWidth: .infinity, maxHeight: 200)
                             .padding(.vertical)
                             .shadow(radius: 4, x: 0, y: 4)
                             .foregroundColor(Color("FourthColor"))
@@ -67,21 +73,16 @@ struct QuizView: View {
                         
                     }
                     
-                    HStack {
-                        
-                        AnswerButtonLeft(buttonText: question.correct_answer)
-                        AnswerButtonRight(buttonText: question.incorrect_answers.first ?? "")
+                    LazyVGrid(columns: columns, spacing: 10) {
+                        ForEach(questionViewModel.answers, id: \.self) { answers in
+                            AnswerButton(buttonText: answers)
+                        }
                     }
-                    
-                    HStack {
-                        
-                        AnswerButtonLeft(buttonText: "Antwort 3")
-                        AnswerButtonRight(buttonText: "Antwort 4")
-                    }
+                    .padding(.horizontal, 10)
                     
                     
                     Button {
-                        
+                        questionViewModel.endGame()
                     } label: {
                         Text("Prüfen")
                             .bold()
@@ -113,17 +114,29 @@ struct QuizView: View {
                     }
                 }
             }
-            .background(Color("PrimaryColor"))
+            .background(Color("MainColor"))
             .navigationBarBackButtonHidden(true)
+            .toolbar(.hidden, for: .tabBar)
+            
+            
         }
         
-    @StateObject private var questionViewModel = QuestionListViewModel()
+    }
+    
+        
+    @EnvironmentObject private var questionViewModel: QuestionListViewModel
+    let columns = [GridItem(), GridItem()]
+    @State private var selectedTab: TabItem = .home
     
     
     
     
 }
 
+
 #Preview {
-    QuizView()
+    NavigationStack {
+        QuizView()
+            .environmentObject(QuestionListViewModel())
+    }
 }
