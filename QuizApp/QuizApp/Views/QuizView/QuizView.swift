@@ -75,31 +75,15 @@ struct QuizView: View {
                     
                     LazyVGrid(columns: columns, spacing: 10) {
                         ForEach(questionViewModel.answers, id: \.self) { answers in
+                            
                             AnswerButton(buttonText: answers)
+                            
                         }
                     }
                     .padding(.horizontal, 10)
                     
                     
-                    Button {
-                        questionViewModel.endGame()
-                    } label: {
-                        Text("Prüfen")
-                            .bold()
-                            .font(.title2)
-                            .foregroundStyle(Color.black)
-                    }
-                    .frame(maxWidth: .infinity)
-                    .frame(height: 50)
-                    .background(Color("SecondColor"))
-                    .cornerRadius(10.0)
-                    .padding(.horizontal, 16)
-                    .padding(.bottom, 32)
-                    .padding(.top, 16)
-                    .shadow(radius: 4, x: 0, y: 4)
-                    .onTapGesture(perform: {
-                        print("Prüfen")
-                    })
+                   
                 }
             }
             .navigationBarTitle("Category", displayMode: .inline)

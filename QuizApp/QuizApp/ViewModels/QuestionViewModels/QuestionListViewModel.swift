@@ -12,10 +12,27 @@ class QuestionListViewModel: ObservableObject {
     
     private var token: String? = nil
     var questions = [Question]()
+    @Published var correctAnswer: String = ""
     @Published var answers = [String]()
     @Published var currentQuestion: Question?
     @Published private var selectedTab: TabItem = .home
     @Published var isFinished = false
+    
+    @Published var listAnwserButton = [AnswerButton]()
+    
+    func fillAnswerButton() {
+        listAnwserButton.append(AnswerButton(buttonText: answers.first!))
+        answers.remove(at: 0)
+        listAnwserButton.append(AnswerButton(buttonText: answers.first!))
+        answers.remove(at: 0)
+        listAnwserButton.append(AnswerButton(buttonText: answers.first!))
+        answers.remove(at: 0)
+        listAnwserButton.append(AnswerButton(buttonText: answers.first!))
+        answers.remove(at: 0)
+        
+    }
+    
+    
     
     
     
@@ -30,6 +47,7 @@ class QuestionListViewModel: ObservableObject {
                 self.questions = try await fetchQuestions()
                 self.currentQuestion = questions.first
                 fetchAnswers()
+            
                 
             } catch {
                 print("Request failed with error: \(error)")
@@ -40,7 +58,7 @@ class QuestionListViewModel: ObservableObject {
     private func fetchQuestions() async throws -> [Question] {
         self.token = try await fetchToken()
         
-        guard let token = self.token, let url = URL(string: "https://opentdb.com/api.php?amount=2&type=multiple&token=\(token)") else {
+        guard let token = self.token, let url = URL(string: "https://opentdb.com/api.php?amount=10&type=multiple&token=\(token)") else {
             throw HTTPError.invalidURL
         }
         let (data, _) = try await URLSession.shared.data(from: url)
@@ -71,7 +89,8 @@ class QuestionListViewModel: ObservableObject {
     private func fetchAnswers() {
         guard let currentQuestion = currentQuestion else {
             return
-        } 
+        }
+        correctAnswer = currentQuestion.correct_answer
         answers.append(currentQuestion.correct_answer)
         answers.append(contentsOf: currentQuestion.incorrect_answers)
         answers.shuffle()

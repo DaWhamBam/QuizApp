@@ -10,10 +10,15 @@ import SwiftUI
 struct AnswerButton: View {
     @State var buttonText: String
     
+    
     var body: some View {
         Button {
             
-            self.didTap = DidTap()
+            checkAnwser()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                questionViewModel.endGame()
+            }
+            
             
         } label: {
             Text(buttonText)
@@ -27,22 +32,26 @@ struct AnswerButton: View {
                 .frame(minHeight: 150)
         }
         
-        .background(didTap ? Color("ThirdColor") : Color("FourthColor"))
+        .background(colorChange)
         .cornerRadius(10.0)
-       // .padding(.leading, 5)
+        // .padding(.leading, 5)
         //.padding(.trailing, 5)
         .shadow(radius: 4, x: 0, y: 4)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
     
-    @State private var didTap: Bool = false
+    @State var colorChange: Color = Color("FourthColor")
+    @EnvironmentObject var questionViewModel: QuestionListViewModel
     
-    func DidTap() -> Bool {
-        if self.didTap == false {
-            return true
+    
+    func checkAnwser() {
+        
+        if buttonText == questionViewModel.correctAnswer {
+            colorChange = Color.green
         } else {
-            return false
+            colorChange = Color.red
         }
+        
         
     }
     
