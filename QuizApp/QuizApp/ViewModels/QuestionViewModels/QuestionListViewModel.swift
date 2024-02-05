@@ -17,25 +17,12 @@ class QuestionListViewModel: ObservableObject {
     @Published var currentQuestion: Question?
     @Published private var selectedTab: TabItem = .home
     @Published var isFinished = false
-    
-    @Published var listAnwserButton = [AnswerButton]()
-    
-    func fillAnswerButton() {
-        listAnwserButton.append(AnswerButton(buttonText: answers.first!))
-        answers.remove(at: 0)
-        listAnwserButton.append(AnswerButton(buttonText: answers.first!))
-        answers.remove(at: 0)
-        listAnwserButton.append(AnswerButton(buttonText: answers.first!))
-        answers.remove(at: 0)
-        listAnwserButton.append(AnswerButton(buttonText: answers.first!))
-        answers.remove(at: 0)
-        
-    }
+    @Published var category = ""
+    var amountQuestions = "10"
+    @Published var amount = ["1", "2", "3"]
     
     
-    
-    
-    
+
     init() {
         fetchData()
       
@@ -58,7 +45,7 @@ class QuestionListViewModel: ObservableObject {
     private func fetchQuestions() async throws -> [Question] {
         self.token = try await fetchToken()
         
-        guard let token = self.token, let url = URL(string: "https://opentdb.com/api.php?amount=10&type=multiple&token=\(token)") else {
+        guard let token = self.token, let url = URL(string: "https://opentdb.com/api.php?amount=\(amountQuestions)&category=\(category)&type=multiple&token=\(token)") else {
             throw HTTPError.invalidURL
         }
         let (data, _) = try await URLSession.shared.data(from: url)
@@ -120,4 +107,10 @@ class QuestionListViewModel: ObservableObject {
         }
         
     }
+    
+    func getAmount(amount: String) -> String {
+        
+        return amountQuestions
+    }
+    
 }

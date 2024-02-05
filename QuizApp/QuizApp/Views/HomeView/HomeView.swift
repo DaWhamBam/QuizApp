@@ -76,23 +76,33 @@ struct HomeView: View {
                     ScrollView {
                         LazyVGrid(columns: columns, spacing: 10) {
                             ForEach(categoryViewModel.categories) { category in
-                                NavigationLink {
-                                    Text(category.name)
+                                Button {
+                                    editTask()
+                                   // Text(category.name)
                                 } label: {
                                     CategoryCardView(categoryViewModel: category)
                                         .padding(.top, 30)
                                 }
+                                .sheet(isPresented: $shouldShowEditTask) {
+                                    TaskEditView(isPresented: $shouldShowEditTask, title: category.name)
+                                }
+                                
+                                
                             }
+                            
+                            
                         }
                     }
                    .padding(.horizontal, 70)
                     
                 }
                 
+                
+                
                 NavigationLink {
                     WrapperQuizView()
                 } label: {
-                    Text("Custom Quiz")
+                    Text("Random Quiz")
                         .font(.title2)
                         .bold()
                         .foregroundStyle(.black)
@@ -107,6 +117,7 @@ struct HomeView: View {
                 
             }
             .background(Color("PrimaryColor"))
+            
         }
         
     }
@@ -115,6 +126,13 @@ struct HomeView: View {
     @StateObject private var categoryViewModel = CategoryListViewModel()
     @Binding var tab: TabItem
     let columns = [GridItem(spacing: 15), GridItem(spacing: 15)]
+    @State private var shouldShowEditTask = false
+    
+    
+    
+    private func editTask() {
+        shouldShowEditTask.toggle()
+    }
     
     
 }

@@ -29,6 +29,7 @@
 		102F09AC2B62A1AB00FE647D /* QuestionListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102F09AB2B62A1AB00FE647D /* QuestionListViewModel.swift */; };
 		102F09B22B62A65200FE647D /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102F09B12B62A65200FE647D /* ResultView.swift */; };
 		102F09B42B62A7D600FE647D /* CircleProgressbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102F09B32B62A7D600FE647D /* CircleProgressbar.swift */; };
+		103A23A52B7112F100ED9725 /* TaskEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 103A23A42B7112F100ED9725 /* TaskEditView.swift */; };
 		105F93B32B4C39C000C7C0E6 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105F93B22B4C39C000C7C0E6 /* SignInView.swift */; };
 		105F93B52B4C41DB00C7C0E6 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105F93B42B4C41DB00C7C0E6 /* SignUpView.swift */; };
 		10B130E72B556526005E587B /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B130E62B556526005E587B /* Enums.swift */; };
@@ -81,6 +82,7 @@
 		102F09AB2B62A1AB00FE647D /* QuestionListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionListViewModel.swift; sourceTree = "<group>"; };
 		102F09B12B62A65200FE647D /* ResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultView.swift; sourceTree = "<group>"; };
 		102F09B32B62A7D600FE647D /* CircleProgressbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleProgressbar.swift; sourceTree = "<group>"; };
+		103A23A42B7112F100ED9725 /* TaskEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskEditView.swift; sourceTree = "<group>"; };
 		105F93B22B4C39C000C7C0E6 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		105F93B42B4C41DB00C7C0E6 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		10B130E62B556526005E587B /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 				101B577C2B5FE7400068E23C /* ProgressBar.swift */,
 				101EC4B42B6149B700AAE1FD /* AnswerButtonRight.swift */,
 				101EC4B62B61525100AAE1FD /* AnswerButton.swift */,
+				103A23A42B7112F100ED9725 /* TaskEditView.swift */,
 			);
 			path = QuizView;
 			sourceTree = "<group>";
@@ -407,6 +410,7 @@
 				100B52B12B4D788400B97941 /* SettingsView.swift in Sources */,
 				101B577B2B5FE31B0068E23C /* QuizView.swift in Sources */,
 				105F93B52B4C41DB00C7C0E6 /* SignUpView.swift in Sources */,
+				103A23A52B7112F100ED9725 /* TaskEditView.swift in Sources */,
 				101EC4B72B61525100AAE1FD /* AnswerButton.swift in Sources */,
 				1019E1EB2B6A9B3F00DF6C0A /* WrapperQuizView.swift in Sources */,
 				10CAA4362B4EC4BB00295A31 /* CategoryCardView.swift in Sources */,
