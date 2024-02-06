@@ -76,28 +76,19 @@ struct HomeView: View {
                     ScrollView {
                         LazyVGrid(columns: columns, spacing: 10) {
                             ForEach(categoryViewModel.categories) { category in
-                                Button {
-                                    editTask()
-                                   // Text(category.name)
+                                NavigationLink {
+                                    TaskEditView(questionViewModel: QuestionListViewModel(), title: category.name)
+                                   
                                 } label: {
                                     CategoryCardView(categoryViewModel: category)
                                         .padding(.top, 30)
                                 }
-                                .sheet(isPresented: $shouldShowEditTask) {
-                                    TaskEditView(isPresented: $shouldShowEditTask, title: category.name)
-                                }
-                                
-                                
                             }
-                            
-                            
                         }
                     }
                    .padding(.horizontal, 70)
                     
                 }
-                
-                
                 
                 NavigationLink {
                     WrapperQuizView()
@@ -116,7 +107,7 @@ struct HomeView: View {
                 
                 
             }
-            .background(Color("PrimaryColor"))
+            .background(Color("MainColor"))
             
         }
         
@@ -126,11 +117,10 @@ struct HomeView: View {
     @StateObject private var categoryViewModel = CategoryListViewModel()
     @Binding var tab: TabItem
     let columns = [GridItem(spacing: 15), GridItem(spacing: 15)]
+    
+    
     @State private var shouldShowEditTask = false
-    
-    
-    
-    private func editTask() {
+    private func showSheet() {
         shouldShowEditTask.toggle()
     }
     

@@ -18,14 +18,13 @@ class QuestionListViewModel: ObservableObject {
     @Published private var selectedTab: TabItem = .home
     @Published var isFinished = false
     @Published var category = ""
-    var amountQuestions = "10"
+    @Published var amountQuestions = "10"
     @Published var amount = ["1", "2", "3"]
+    @Published var newQuestion = [Question]()
     
     
-
     init() {
-        fetchData()
-      
+     // fetchData()
     }
 
     func fetchData() {
@@ -34,7 +33,8 @@ class QuestionListViewModel: ObservableObject {
                 self.questions = try await fetchQuestions()
                 self.currentQuestion = questions.first
                 fetchAnswers()
-            
+                newQuestion = questions
+                
                 
             } catch {
                 print("Request failed with error: \(error)")
@@ -81,6 +81,7 @@ class QuestionListViewModel: ObservableObject {
         answers.append(currentQuestion.correct_answer)
         answers.append(contentsOf: currentQuestion.incorrect_answers)
         answers.shuffle()
+        print(currentQuestion)
     }
     
     func nextQuestion() {
@@ -108,9 +109,9 @@ class QuestionListViewModel: ObservableObject {
         
     }
     
-    func getAmount(amount: String) -> String {
-        
-        return amountQuestions
+    func printAmount() {
+        print(newQuestion)
     }
+    
     
 }

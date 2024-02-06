@@ -107,14 +107,9 @@ struct QuizView: View {
         
     }
     
-        
     @EnvironmentObject private var questionViewModel: QuestionListViewModel
     let columns = [GridItem(), GridItem()]
     @State private var selectedTab: TabItem = .home
-    
-    
-    
-    
     
 }
 

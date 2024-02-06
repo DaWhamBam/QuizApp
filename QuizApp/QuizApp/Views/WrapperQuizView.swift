@@ -11,16 +11,21 @@ struct WrapperQuizView: View {
     var body: some View {
         
         if questionViewModel.isFinished == true {
-            ResultView()
+            TaskEditView(questionViewModel: questionViewModel, title: questionViewModel.category)
+            
         } else {
             QuizView()
                 .environmentObject(questionViewModel)
+            
         }
 
     }
     
+    @StateObject var questionViewModel = QuestionListViewModel()
+  //  @State var amount: String
     
-    @StateObject private var questionViewModel = QuestionListViewModel()
+    @State private var amountSelectedView = ""
+    @State var amountListView = ["1", "2", "3"]
     
 }
 

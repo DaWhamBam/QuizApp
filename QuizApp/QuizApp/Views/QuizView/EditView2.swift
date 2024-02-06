@@ -7,10 +7,10 @@
 
 import SwiftUI
 
-struct TaskEditView: View {
+struct EditView2: View {
 
     var body: some View {
-        
+        NavigationStack {
             VStack {
                 
                 Text(title)
@@ -18,25 +18,18 @@ struct TaskEditView: View {
                     .bold()
                     .foregroundStyle(.black)
                 
-                Picker("test", selection: $amountSelectedView) {
-                    ForEach(amountListView, id: \.self) {
+                Picker("test", selection: $questionViewModel.amountQuestions) {
+                    ForEach(questionViewModel.amount, id: \.self) {
                         Text($0)
                     }
                 }
                 .pickerStyle(.menu)
-                .onChange(of: amountSelectedView) {
-                    newValue in
-                    questionViewModel.amountQuestions = newValue
-                    
-                    questionViewModel.fetchData()
-                    questionViewModel.printAmount()
-                }
                  
                  
                 
+                
                 NavigationLink {
-                    WrapperQuizView()
-                    
+                    WrapperQuizView(questionViewModel: questionViewModel)
                 } label: {
                     Text("Start Quiz")
                         .font(.title2)
@@ -49,21 +42,21 @@ struct TaskEditView: View {
                 .shadow(radius: 4, x: 0, y: 4)
                 .offset(y: -8)
                 
-                
             }
+            
+        }
     }
     
-    @ObservedObject var questionViewModel: QuestionListViewModel
+   @StateObject private var questionViewModel = QuestionListViewModel()
     
    // @Binding var isPresented: Bool
     @State var title: String
-    @State private var amountSelectedView = ""
-    @State var amountListView = ["1", "2", "3"]
     
-
+    
+    
 
 }
 
 #Preview {
-    TaskEditView( questionViewModel: QuestionListViewModel(), title: "Book")
+    EditView2( title: "Book")
 }
