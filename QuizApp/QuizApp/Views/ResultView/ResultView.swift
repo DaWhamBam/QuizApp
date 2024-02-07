@@ -9,9 +9,7 @@ import SwiftUI
 
 struct ResultView: View {
     
-    @State var progress: Double = 0
-    
-    
+
     var body: some View {
         NavigationStack {
             VStack {
@@ -22,17 +20,17 @@ struct ResultView: View {
                     .padding(.vertical, 16)
                 
                 ZStack {
-                    CircleProgressbar(progress: progress)
+                    CircleProgressbar(progress: questionViewModel.progressNumber())
                         .frame(maxHeight: .infinity)
                     
                     HStack {
-                        Text("23")
+                        Text(String(questionViewModel.rightQuestions.count))
                             .font(.title)
                             .offset(y: -20)
                             .bold()
                         Text("/")
                             .font(.largeTitle)
-                        Text("25")
+                        Text(String(questionViewModel.questionsAmount.count))
                             .font(.title)
                             .offset(y: 20)
                     }
@@ -41,7 +39,7 @@ struct ResultView: View {
                 
                 ZStack {
                     Rectangle()
-                        .frame(width: .infinity, height: .infinity)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .padding(.vertical)
                         .shadow(radius: 4, x: 0, y: 4)
                         .foregroundColor(Color("FourthColor"))
@@ -74,8 +72,6 @@ struct ResultView: View {
                     .padding(.bottom, 16)
                     
                 }
-                
-                
             }
             .background(Color("PrimaryColor"))
             .toolbar {
@@ -91,16 +87,17 @@ struct ResultView: View {
                     }
                 }
             }
+            .navigationBarBackButtonHidden(true)
             
         }
     }
     
     
     @StateObject private var categoryViewModel = CategoryListViewModel()
+    @EnvironmentObject private var questionViewModel: QuestionListViewModel
     
-    func resetProgress() {
-        progress = 0.36
-        }
+    
+    
     
 }
 

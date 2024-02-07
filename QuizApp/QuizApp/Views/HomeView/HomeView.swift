@@ -77,7 +77,7 @@ struct HomeView: View {
                         LazyVGrid(columns: columns, spacing: 10) {
                             ForEach(categoryViewModel.categories) { category in
                                 NavigationLink {
-                                    TaskEditView(questionViewModel: QuestionListViewModel(), title: category.name)
+                                    GameEditView(category: category.name)
                                    
                                 } label: {
                                     CategoryCardView(categoryViewModel: category)
@@ -92,6 +92,7 @@ struct HomeView: View {
                 
                 NavigationLink {
                     WrapperQuizView()
+                        
                 } label: {
                     Text("Random Quiz")
                         .font(.title2)
@@ -119,10 +120,6 @@ struct HomeView: View {
     let columns = [GridItem(spacing: 15), GridItem(spacing: 15)]
     
     
-    @State private var shouldShowEditTask = false
-    private func showSheet() {
-        shouldShowEditTask.toggle()
-    }
     
     
 }

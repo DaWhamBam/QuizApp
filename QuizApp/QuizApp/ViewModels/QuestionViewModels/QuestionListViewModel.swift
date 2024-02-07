@@ -11,29 +11,28 @@ import Foundation
 class QuestionListViewModel: ObservableObject {
     
     private var token: String? = nil
-    var questions = [Question]()
+    @Published var questions = [Question]()
     @Published var correctAnswer: String = ""
     @Published var answers = [String]()
     @Published var currentQuestion: Question?
-    @Published private var selectedTab: TabItem = .home
     @Published var isFinished = false
-    @Published var category = ""
-    @Published var amountQuestions = "10"
-    @Published var amount = ["1", "2", "3"]
-    @Published var newQuestion = [Question]()
+    @Published var questionsAmount = [Question]()
+    @Published var rightQuestions = [Question]()
+    @Published var progress: Double = 0.9
     
-    
-    init() {
-     // fetchData()
+
+    init(selectedAmount: Int, category: String) {
+        fetchData(selectedAmount: selectedAmount, category: category)
+        
     }
 
-    func fetchData() {
+    func fetchData(selectedAmount: Int, category: String) {
         Task {
             do {
-                self.questions = try await fetchQuestions()
+                self.questions = try await fetchQuestions(selectedAmount: selectedAmount, category: category)
+                self.questionsAmount = questions
                 self.currentQuestion = questions.first
                 fetchAnswers()
-                newQuestion = questions
                 
                 
             } catch {
@@ -42,10 +41,10 @@ class QuestionListViewModel: ObservableObject {
         }
     }
     
-    private func fetchQuestions() async throws -> [Question] {
+    private func fetchQuestions(selectedAmount: Int, category: String) async throws -> [Question] {
         self.token = try await fetchToken()
         
-        guard let token = self.token, let url = URL(string: "https://opentdb.com/api.php?amount=\(amountQuestions)&category=\(category)&type=multiple&token=\(token)") else {
+        guard let token = self.token, let url = URL(string: "https://opentdb.com/api.php?amount=\(selectedAmount)&category=\(category)&type=multiple&token=\(token)") else {
             throw HTTPError.invalidURL
         }
         let (data, _) = try await URLSession.shared.data(from: url)
@@ -81,7 +80,6 @@ class QuestionListViewModel: ObservableObject {
         answers.append(currentQuestion.correct_answer)
         answers.append(contentsOf: currentQuestion.incorrect_answers)
         answers.shuffle()
-        print(currentQuestion)
     }
     
     func nextQuestion() {
@@ -92,6 +90,7 @@ class QuestionListViewModel: ObservableObject {
             self.currentQuestion = questions.first
             answers.removeAll()
             fetchAnswers()
+            
         }
     }
     
@@ -100,6 +99,7 @@ class QuestionListViewModel: ObservableObject {
         if questions.count <= 1 {
             
            isFinished = true
+        print(progressNumber())
           
         } else {
             
@@ -109,9 +109,10 @@ class QuestionListViewModel: ObservableObject {
         
     }
     
-    func printAmount() {
-        print(newQuestion)
+    func progressNumber() -> Double {
+        return Double(rightQuestions.count) / Double(questionsAmount.count)
     }
     
+
     
 }

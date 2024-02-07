@@ -8,10 +8,16 @@
 import SwiftUI
 
 struct WrapperQuizView: View {
+    
+    init(amount: Int = 10, category: String = "") {
+        self._questionViewModel = StateObject(wrappedValue: QuestionListViewModel(selectedAmount: amount, category: category))
+    }
+    
     var body: some View {
         
         if questionViewModel.isFinished == true {
-            TaskEditView(questionViewModel: questionViewModel, title: questionViewModel.category)
+            ResultView()
+                .environmentObject(questionViewModel)
             
         } else {
             QuizView()
@@ -21,14 +27,10 @@ struct WrapperQuizView: View {
 
     }
     
-    @StateObject var questionViewModel = QuestionListViewModel()
-  //  @State var amount: String
-    
-    @State private var amountSelectedView = ""
-    @State var amountListView = ["1", "2", "3"]
-    
+    @StateObject private var questionViewModel: QuestionListViewModel
+
 }
 
 #Preview {
-    WrapperQuizView()
+    WrapperQuizView(amount: 1)
 }

@@ -20,12 +20,24 @@ struct QuizView: View {
                 HStack {
                     
                     HStack {
-                        Text("Punkte:")
+                        Text("Points:")
                             .frame(alignment: .leading)
                             .padding(.leading, 16)
                         
                         Text("124")
                             .frame(maxWidth: .infinity, alignment: .leading)
+                    }
+                    
+                    HStack {
+                        
+                        
+                        Text(String(questionViewModel.questions.count))
+                            .bold()
+                            .font(.title)
+                        
+                        Text("/")
+                        
+                        Text(String(questionViewModel.questionsAmount.count))
                     }
                     
                     HStack {
@@ -42,7 +54,7 @@ struct QuizView: View {
                 .padding(.top, 16)
                 
                 ProgressBar()
-                    .frame(width: .infinity)
+                    .frame(maxWidth: .infinity)
                     .padding(.horizontal, 16)
                     .padding(.bottom, 16)
                 
@@ -102,7 +114,6 @@ struct QuizView: View {
             .navigationBarBackButtonHidden(true)
             .toolbar(.hidden, for: .tabBar)
             
-            
         }
         
     }
@@ -117,6 +128,6 @@ struct QuizView: View {
 #Preview {
     NavigationStack {
         QuizView()
-            .environmentObject(QuestionListViewModel())
+            .environmentObject(QuestionListViewModel(selectedAmount: 1, category: "10"))
     }
 }

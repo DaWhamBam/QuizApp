@@ -48,6 +48,7 @@ struct AnswerButton: View {
         
         if buttonText == questionViewModel.correctAnswer {
             colorChange = Color.green
+            questionViewModel.rightQuestions.append(questionViewModel.currentQuestion!)
         } else {
             colorChange = Color.red
         }
