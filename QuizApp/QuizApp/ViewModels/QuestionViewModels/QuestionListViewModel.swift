@@ -21,15 +21,15 @@ class QuestionListViewModel: ObservableObject {
     @Published var progress: Double = 0.9
     
 
-    init(selectedAmount: Int, category: String) {
-        fetchData(selectedAmount: selectedAmount, category: category)
+    init(selectedAmount: Int, category: String, difficulty: String) {
+        fetchData(selectedAmount: selectedAmount, category: category, difficulty: difficulty)
         
     }
 
-    func fetchData(selectedAmount: Int, category: String) {
+    func fetchData(selectedAmount: Int, category: String, difficulty: String) {
         Task {
             do {
-                self.questions = try await fetchQuestions(selectedAmount: selectedAmount, category: category)
+                self.questions = try await fetchQuestions(selectedAmount: selectedAmount, category: category, difficulty: difficulty)
                 self.questionsAmount = questions
                 self.currentQuestion = questions.first
                 fetchAnswers()
@@ -41,14 +41,15 @@ class QuestionListViewModel: ObservableObject {
         }
     }
     
-    private func fetchQuestions(selectedAmount: Int, category: String) async throws -> [Question] {
+    private func fetchQuestions(selectedAmount: Int, category: String, difficulty: String) async throws -> [Question] {
         self.token = try await fetchToken()
         
-        guard let token = self.token, let url = URL(string: "https://opentdb.com/api.php?amount=\(selectedAmount)&category=\(category)&type=multiple&token=\(token)") else {
+        guard let token = self.token, let url = URL(string: "https://opentdb.com/api.php?amount=\(selectedAmount)&category=\(category)&difficulty=\(difficulty)&type=multiple&token=\(token)") else {
             throw HTTPError.invalidURL
         }
         let (data, _) = try await URLSession.shared.data(from: url)
         print(data)
+        print(url)
         
         let result = try JSONDecoder().decode(QuestionResult.self, from: data)
         print(result)

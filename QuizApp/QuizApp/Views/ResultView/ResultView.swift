@@ -76,8 +76,8 @@ struct ResultView: View {
             .background(Color("PrimaryColor"))
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button {
-                        
+                    NavigationLink {
+                        ContentView()
                     } label: {
                         Text("Save")
                             .bold()
@@ -88,6 +88,7 @@ struct ResultView: View {
                 }
             }
             .navigationBarBackButtonHidden(true)
+            .toolbar(.hidden, for: .tabBar)
             
         }
     }
@@ -95,6 +96,8 @@ struct ResultView: View {
     
     @StateObject private var categoryViewModel = CategoryListViewModel()
     @EnvironmentObject private var questionViewModel: QuestionListViewModel
+    @State private var selectedTab: TabItem = .home
+    
     
     
     

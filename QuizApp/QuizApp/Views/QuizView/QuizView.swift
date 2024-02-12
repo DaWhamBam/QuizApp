@@ -102,11 +102,20 @@ struct QuizView: View {
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     Button {
-                        
+                        showAlert.toggle()
+                        //HomeView(tab: $selectedTab)
                     } label: {
                         Image(systemName: "x.circle")
                             .bold()
                             .foregroundStyle(Color.black)
+                    }
+                    .alert("Attentione", isPresented: $showAlert) {
+                        Button("Continue", role: .cancel, action: {})
+                        Button("End Quiz", action: {
+                            
+                            questionViewModel.isFinished = true
+                            
+                        })
                     }
                 }
             }
@@ -121,6 +130,7 @@ struct QuizView: View {
     @EnvironmentObject private var questionViewModel: QuestionListViewModel
     let columns = [GridItem(), GridItem()]
     @State private var selectedTab: TabItem = .home
+    @State private var showAlert = false
     
 }
 
@@ -128,6 +138,6 @@ struct QuizView: View {
 #Preview {
     NavigationStack {
         QuizView()
-            .environmentObject(QuestionListViewModel(selectedAmount: 1, category: "10"))
+            .environmentObject(QuestionListViewModel(selectedAmount: 1, category: "10", difficulty: ""))
     }
 }

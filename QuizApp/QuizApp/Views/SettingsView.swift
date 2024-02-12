@@ -10,7 +10,15 @@ import SwiftUI
 struct SettingsView: View {
     var body: some View {
         Text("Settings")
+        
+        PrimaryButton(title: "Logout", action: userViewModel.logout)
+            .padding(48)
+        
+        
     }
+    
+    @EnvironmentObject private var userViewModel: UserViewModel
+    
 }
 
 #Preview {

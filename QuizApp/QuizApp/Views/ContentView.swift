@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Firebase
 
 struct ContentView: View {
     var body: some View {
@@ -29,6 +30,7 @@ struct ContentView: View {
                 .tag(TabItem.settings)
                 
         }
+        .navigationBarBackButtonHidden(true)
     }
     
     @State private var selectedTab: TabItem = .home

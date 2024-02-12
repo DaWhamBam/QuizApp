@@ -6,12 +6,18 @@
 //
 
 import Foundation
+import SwiftUI
 
 @MainActor
 class CategoryListViewModel: ObservableObject {
     
     init() {
         fetchData()
+        /*
+        ForEach(categories) { categorie in
+            categorie.name.split(separator: 15)
+        }
+         */
     }
     
     @Published var categories = [CategoryViewModel]()

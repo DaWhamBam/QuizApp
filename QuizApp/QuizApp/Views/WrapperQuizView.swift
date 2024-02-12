@@ -9,8 +9,8 @@ import SwiftUI
 
 struct WrapperQuizView: View {
     
-    init(amount: Int = 10, category: String = "") {
-        self._questionViewModel = StateObject(wrappedValue: QuestionListViewModel(selectedAmount: amount, category: category))
+    init(amount: Int = 10, category: String = "", difficulty: String = "") {
+        self._questionViewModel = StateObject(wrappedValue: QuestionListViewModel(selectedAmount: amount, category: category, difficulty: difficulty))
     }
     
     var body: some View {
