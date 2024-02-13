@@ -17,7 +17,7 @@ struct HomeView: View {
                 VStack{
                     HStack {
                         VStack {
-                            Text("Hello Martin!")
+                            Text("Hello \(userViewModel.user?.name ?? "")!")
                                 .bold()
                                 .font(.title)
                                 .padding(.leading, 72)
@@ -49,7 +49,7 @@ struct HomeView: View {
                                 Text("Points:")
                                     .bold()
                                 
-                                Text("2000")
+                                Text("\(userViewModel.user?.points ?? 0)" )
                                 
                             }
                         }
@@ -64,7 +64,7 @@ struct HomeView: View {
                                 Text("Rank:")
                                     .bold()
                                 
-                                Text("3521")
+                                Text(userViewModel.user?.rank ?? "9999")
                                 
                             }
                         }
@@ -78,6 +78,7 @@ struct HomeView: View {
                             ForEach(categoryViewModel.categories) { category in
                                 NavigationLink {
                                     GameEditView(category: category.name)
+                                        .environmentObject(userViewModel)
                                    
                                 } label: {
                                     CategoryCardView(categoryViewModel: category)
@@ -92,6 +93,7 @@ struct HomeView: View {
                 
                 NavigationLink {
                     WrapperQuizView()
+                        .environmentObject(userViewModel)
                         
                 } label: {
                     Text("Random Quiz")
@@ -116,6 +118,7 @@ struct HomeView: View {
     }
     
     
+    @StateObject private var userViewModel = UserViewModel()
     @StateObject private var categoryViewModel = CategoryListViewModel()
     @Binding var tab: TabItem
     let columns = [GridItem(spacing: 15), GridItem(spacing: 15)]

@@ -11,6 +11,7 @@ import Firebase
 struct ContentView: View {
     var body: some View {
         TabView(selection: $selectedTab) {
+            
             HomeView(tab: $selectedTab)
                 .tabItem {
                     Label(TabItem.home.title, systemImage: TabItem.home.icon)
@@ -31,6 +32,7 @@ struct ContentView: View {
                 
         }
         .navigationBarBackButtonHidden(true)
+        
     }
     
     @State private var selectedTab: TabItem = .home

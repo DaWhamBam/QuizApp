@@ -60,7 +60,7 @@ struct SignInView: View {
             
         }
         .font(.headline)
-        .background(Color("PrimaryColor"))
+        .background(Color("MainColor"))
         .textInputAutocapitalization(.never)
         
         

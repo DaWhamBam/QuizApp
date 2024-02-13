@@ -98,21 +98,17 @@ class QuestionListViewModel: ObservableObject {
     func endGame() {
         
         if questions.count <= 1 {
-            
            isFinished = true
-        print(progressNumber())
-          
         } else {
-            
             nextQuestion()
-            
         }
-        
     }
     
     func progressNumber() -> Double {
         return Double(rightQuestions.count) / Double(questionsAmount.count)
     }
+    
+    
     
 
     

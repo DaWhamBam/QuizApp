@@ -45,12 +45,12 @@ struct ResultView: View {
                         .foregroundColor(Color("FourthColor"))
                     
                     HStack {
-                        Text("Punkte:")
+                        Text("Points:")
                             .font(.title)
                             .bold()
                             .foregroundStyle(.white)
                         
-                        Text("20352")
+                        Text("\(questionViewModel.rightQuestions.count * 10)" )
                             .font(.title)
                             .bold()
                             .foregroundStyle(.white)
@@ -73,17 +73,21 @@ struct ResultView: View {
                     
                 }
             }
-            .background(Color("PrimaryColor"))
+            .background(Color("MainColor"))
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     NavigationLink {
                         ContentView()
+                        
                     } label: {
                         Text("Save")
                             .bold()
                         Image(systemName: "square.and.arrow.down")
                             .bold()
                             .foregroundStyle(Color.blue)
+                    }
+                    .onAppear() {
+                        userViewModel.updatePoints(with: userViewModel.user?.id ?? "", rightQuestions: questionViewModel.rightQuestions)
                     }
                 }
             }
@@ -93,7 +97,7 @@ struct ResultView: View {
         }
     }
     
-    
+    @EnvironmentObject private var userViewModel: UserViewModel
     @StateObject private var categoryViewModel = CategoryListViewModel()
     @EnvironmentObject private var questionViewModel: QuestionListViewModel
     @State private var selectedTab: TabItem = .home

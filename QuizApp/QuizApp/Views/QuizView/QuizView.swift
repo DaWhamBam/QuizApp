@@ -98,7 +98,7 @@ struct QuizView: View {
                    
                 }
             }
-            .navigationBarTitle("Category", displayMode: .inline)
+            .navigationBarTitle("\(questionViewModel.currentQuestion?.category ?? "")", displayMode: .inline)
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     Button {
