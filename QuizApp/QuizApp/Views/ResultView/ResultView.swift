@@ -58,7 +58,7 @@ struct ResultView: View {
                 }
                 
                 Divider()
-                
+                /*
                 ScrollView {
                     
                     ForEach(categoryViewModel.categories) { category in
@@ -72,19 +72,17 @@ struct ResultView: View {
                     .padding(.bottom, 16)
                     
                 }
+                 */
             }
             .background(Color("MainColor"))
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    NavigationLink {
-                        ContentView()
+                    Button {
+                        isPresented = false
                         
                     } label: {
-                        Text("Save")
+                        Text("Done")
                             .bold()
-                        Image(systemName: "square.and.arrow.down")
-                            .bold()
-                            .foregroundStyle(Color.blue)
                     }
                     .onAppear() {
                         userViewModel.updatePoints(with: userViewModel.user?.id ?? "", rightQuestions: questionViewModel.rightQuestions)
@@ -93,14 +91,13 @@ struct ResultView: View {
             }
             .navigationBarBackButtonHidden(true)
             .toolbar(.hidden, for: .tabBar)
-            
         }
     }
     
     @EnvironmentObject private var userViewModel: UserViewModel
-    @StateObject private var categoryViewModel = CategoryListViewModel()
+    //@StateObject private var categoryViewModel = CategoryListViewModel()
     @EnvironmentObject private var questionViewModel: QuestionListViewModel
-    @State private var selectedTab: TabItem = .home
+    @Binding var isPresented: Bool
     
     
     
@@ -109,5 +106,7 @@ struct ResultView: View {
 }
 
 #Preview {
-    ResultView()
+    ResultView(isPresented: .constant(false))
+        .environmentObject(UserViewModel())
+        .environmentObject(QuestionListViewModel(selectedAmount: 10, category: "Book", difficulty: "easy"))
 }

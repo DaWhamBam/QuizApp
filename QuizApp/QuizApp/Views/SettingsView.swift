@@ -11,10 +11,11 @@ struct SettingsView: View {
     var body: some View {
         VStack {
             
-            TextField("\(userViewModel.user?.name ?? "")", text: $name)
-                .onSubmit {
-                    userViewModel.updateName(with: userViewModel.user?.id ?? "", name: name)
-                }
+            TextField("Enter your name", text: $name, onCommit: {
+                            userViewModel.updateName(with: userViewModel.user?.id ?? "", name: name)
+                        })
+                        .padding()
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
             
             PrimaryButton(title: "Logout", action: userViewModel.logout)
                 .padding(48)
@@ -33,4 +34,5 @@ struct SettingsView: View {
 
 #Preview {
     SettingsView()
+        .environmentObject(UserViewModel())
 }

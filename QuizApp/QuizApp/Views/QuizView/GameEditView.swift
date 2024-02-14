@@ -74,7 +74,7 @@ struct GameEditView: View {
                     
                 
                 NavigationLink {
-                    WrapperQuizView(amount: amountSelected, category: categoryNumber(), difficulty: selectedDifficulty)
+                    WrapperQuizView(amount: amountSelected, category: categoryNumber(), difficulty: selectedDifficulty, isPresented: $isPresented)
                 } label: {
                     Text("Start Quiz")
                         .font(.title2)
@@ -92,11 +92,26 @@ struct GameEditView: View {
                 
             }
             .background(Color("MainColor"))
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        isPresented = false
+                        
+                    } label: {
+                        Image(systemName: "x.circle")
+                            .bold()
+                            .foregroundStyle(Color.black)
+                    }
+                    
+                }
+            }
         
     }
     
     
     @EnvironmentObject var questionViewModel: QuestionListViewModel
+    
+    @Binding var isPresented: Bool
     
     let category: String
     @State private var amountSelected = 1
@@ -169,5 +184,5 @@ struct GameEditView: View {
 
 
 #Preview {
-    GameEditView(category: "Book")
+    GameEditView(isPresented: .constant(false), category: "Book" )
 }

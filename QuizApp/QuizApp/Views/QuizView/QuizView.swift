@@ -100,10 +100,10 @@ struct QuizView: View {
             }
             .navigationBarTitle("\(questionViewModel.currentQuestion?.category ?? "")", displayMode: .inline)
             .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
+                ToolbarItem(placement: .topBarTrailing) {
                     Button {
                         showAlert.toggle()
-                        //HomeView(tab: $selectedTab)
+                        
                     } label: {
                         Image(systemName: "x.circle")
                             .bold()
@@ -131,6 +131,7 @@ struct QuizView: View {
     let columns = [GridItem(), GridItem()]
     @State private var selectedTab: TabItem = .home
     @State private var showAlert = false
+    
     
 }
 

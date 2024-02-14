@@ -7,6 +7,8 @@
 
 import Foundation
 import FirebaseAuth
+import FirebaseFirestore
+import FirebaseFirestoreSwift
 
 
 class UserViewModel: ObservableObject {
@@ -20,6 +22,8 @@ class UserViewModel: ObservableObject {
     
     @Published var user: FireUser?
     
+    
+    private var listener: ListenerRegistration?
     
     var userIsLoggedIn: Bool {
         user != nil
@@ -52,8 +56,6 @@ class UserViewModel: ObservableObject {
             
             self.fetchUser(with: authResult.user.uid)
             
-            
-            
         }
     }
     
@@ -84,7 +86,7 @@ class UserViewModel: ObservableObject {
             print("Error signing out: ", error.localizedDescription)
         }
     }
-
+    
 }
 
 
@@ -103,27 +105,26 @@ extension UserViewModel {
     }
     
     private func fetchUser(with id: String) {
-        FirebaseManager.shared.database.collection("users").document(id).getDocument { document, error in
-            if let error {
-                print("Fetching user failed:", error.localizedDescription)
-                return
-            }
-            
-            guard let document else {
-                print("Document don't exist!")
+        
+        self.listener = FirebaseManager.shared.database.collection("users")
+            .whereField("id", isEqualTo: id)
+            .addSnapshotListener { querySnapshot, error in
+                if let error {
+                    print(error.localizedDescription)
+                    return
+                }
                 
-                return
-            }
-            
-            do {
-                let user = try document.data(as: FireUser.self)
+                guard let documents = querySnapshot?.documents else {
+                    print("Fehler beim Laden der Tasks")
+                    return
+                }
+                
+                let user = documents.compactMap { queryDocumentSnapshot -> FireUser? in
+                    try? queryDocumentSnapshot.data(as: FireUser.self)
+                }.first
+                
                 self.user = user
-                print(user)
-            } catch {
-                print("Document is not a user", error.localizedDescription)
             }
-            
-        }
     }
     
     func updatePoints(with id: String, rightQuestions: [Question]) {
@@ -141,12 +142,16 @@ extension UserViewModel {
         let userName = FirebaseManager.shared.database.collection("users").document(id)
         
         userName.updateData([
-            "name" : name
-        ])
-        fetchUser(with: id)
-        print("Dokument succesfully updated")
+            "name": name
+        ]) { error in
+            if let error = error {
+                print("Error updating document: \(error)")
+            } else {
+                print("Document successfully updated")
+            }
+        }
+        
     }
     
-
 }
 
