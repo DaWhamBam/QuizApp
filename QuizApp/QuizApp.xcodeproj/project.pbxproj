@@ -10,7 +10,7 @@
 		100493C42B6928C8006AF4E0 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100493C32B6928C8006AF4E0 /* Token.swift */; };
 		100B52AC2B4D757E00B97941 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100B52AB2B4D757E00B97941 /* HomeView.swift */; };
 		100B52AF2B4D761300B97941 /* TabItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100B52AE2B4D761300B97941 /* TabItem.swift */; };
-		100B52B12B4D788400B97941 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100B52B02B4D788400B97941 /* SettingsView.swift */; };
+		100B52B12B4D788400B97941 /* SettingsSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100B52B02B4D788400B97941 /* SettingsSheet.swift */; };
 		100B52B32B4D788E00B97941 /* BoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100B52B22B4D788E00B97941 /* BoardView.swift */; };
 		100B52B52B4D793B00B97941 /* FirstView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100B52B42B4D793B00B97941 /* FirstView.swift */; };
 		1019E1EB2B6A9B3F00DF6C0A /* WrapperQuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1019E1EA2B6A9B3F00DF6C0A /* WrapperQuizView.swift */; };
@@ -71,6 +71,7 @@
 		10CAA4362B4EC4BB00295A31 /* CategoryCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10CAA4352B4EC4BB00295A31 /* CategoryCardView.swift */; };
 		10CAA4382B4EC86800295A31 /* CategoryListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10CAA4372B4EC86800295A31 /* CategoryListViewModel.swift */; };
 		10CAA43A2B4EC8CF00295A31 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10CAA4392B4EC8CF00295A31 /* Category.swift */; };
+		10DF8C4A2B7E14D400D15A8E /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10DF8C492B7E14D400D15A8E /* SettingView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,7 +95,7 @@
 		100493C32B6928C8006AF4E0 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		100B52AB2B4D757E00B97941 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		100B52AE2B4D761300B97941 /* TabItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabItem.swift; sourceTree = "<group>"; };
-		100B52B02B4D788400B97941 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		100B52B02B4D788400B97941 /* SettingsSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSheet.swift; sourceTree = "<group>"; };
 		100B52B22B4D788E00B97941 /* BoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardView.swift; sourceTree = "<group>"; };
 		100B52B42B4D793B00B97941 /* FirstView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstView.swift; sourceTree = "<group>"; };
 		1019E1EA2B6A9B3F00DF6C0A /* WrapperQuizView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrapperQuizView.swift; sourceTree = "<group>"; };
@@ -131,6 +132,7 @@
 		10CAA4352B4EC4BB00295A31 /* CategoryCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCardView.swift; sourceTree = "<group>"; };
 		10CAA4372B4EC86800295A31 /* CategoryListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListViewModel.swift; sourceTree = "<group>"; };
 		10CAA4392B4EC8CF00295A31 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		10DF8C492B7E14D400D15A8E /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -351,14 +353,14 @@
 		105F93B02B4C25BF00C7C0E6 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				10DF8C482B7E145E00D15A8E /* Settings */,
 				102F09B02B62A62000FE647D /* Onboarding */,
 				102F09AF2B62A60B00FE647D /* ResultView */,
 				101B57792B5FE3030068E23C /* QuizView */,
 				10CAA4342B4EC49E00295A31 /* HomeView */,
 				10298BBD2B46E49900AD2174 /* ContentView.swift */,
-				100B52B02B4D788400B97941 /* SettingsView.swift */,
-				100B52B22B4D788E00B97941 /* BoardView.swift */,
 				1019E1EA2B6A9B3F00DF6C0A /* WrapperQuizView.swift */,
+				100B52B22B4D788E00B97941 /* BoardView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -381,6 +383,15 @@
 				10CAA4352B4EC4BB00295A31 /* CategoryCardView.swift */,
 			);
 			path = HomeView;
+			sourceTree = "<group>";
+		};
+		10DF8C482B7E145E00D15A8E /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				100B52B02B4D788400B97941 /* SettingsSheet.swift */,
+				10DF8C492B7E14D400D15A8E /* SettingView.swift */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -547,10 +558,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				10B130E92B557458005E587B /* CategoryViewModel.swift in Sources */,
-				100B52B12B4D788400B97941 /* SettingsView.swift in Sources */,
+				100B52B12B4D788400B97941 /* SettingsSheet.swift in Sources */,
 				101B577B2B5FE31B0068E23C /* QuizView.swift in Sources */,
 				105F93B52B4C41DB00C7C0E6 /* SignUpView.swift in Sources */,
 				1049B77B2B7A591F00888536 /* AuthentificationMode.swift in Sources */,
+				10DF8C4A2B7E14D400D15A8E /* SettingView.swift in Sources */,
 				103A23A52B7112F100ED9725 /* GameEditView.swift in Sources */,
 				101EC4B72B61525100AAE1FD /* AnswerButton.swift in Sources */,
 				1019E1EB2B6A9B3F00DF6C0A /* WrapperQuizView.swift in Sources */,

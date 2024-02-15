@@ -24,7 +24,7 @@ struct ContentView: View {
                 }
                 .tag(TabItem.board)
             
-            SettingsView()
+            SettingView()
                 .tabItem {
                     Label(TabItem.settings.title, systemImage: TabItem.settings.icon)
                 }
