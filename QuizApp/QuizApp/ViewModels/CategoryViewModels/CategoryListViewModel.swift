@@ -5,6 +5,7 @@ import SwiftUI
 class CategoryListViewModel: ObservableObject {
     
     @Published var categories = [CategoryViewModel]()
+    @Published var selectedCategorie = ""
     
     init() {
         fetchData()
@@ -39,9 +40,11 @@ class CategoryListViewModel: ObservableObject {
         
         return categories.map { categoryViewModel in
             var splittedName = categoryViewModel.name
-            splittedName = splittedName.replacingOccurrences(of: "Entertainment:", with: "")
-            splittedName = splittedName.replacingOccurrences(of: "Science:", with: "")
+            splittedName = splittedName.replacingOccurrences(of: "Entertainment: ", with: "")
+            splittedName = splittedName.replacingOccurrences(of: "Science: ", with: "")
+            print(splittedName)
             return CategoryViewModel(category: Category(id: categoryViewModel.id, name: splittedName.trimmingCharacters(in: .whitespaces)))
+            
         }
     }
     

@@ -77,7 +77,9 @@ struct HomeView: View {
                     LazyVGrid(columns: columns, spacing: 10) {
                         ForEach(categoryViewModel.categories) { category in
                             Button {
+                                categoryViewModel.selectedCategorie = category.name
                                 shouldShowNewQuiz = true
+                                
                                 
                             } label: {
                                 CategoryCardView(categoryViewModel: category)
@@ -85,15 +87,18 @@ struct HomeView: View {
                             }
                             .fullScreenCover(isPresented: $shouldShowNewQuiz){
                                 NavigationStack{
-                                    GameEditView(isPresented: $shouldShowNewQuiz, category: category.name)
+                                    GameEditView(isPresented: $shouldShowNewQuiz)
                                         .environmentObject(userViewModel)
+                                        .environmentObject(categoryViewModel)
                                 }
                             }
                         }
                         
                     }
+                    .padding(.horizontal, 70)
+                    .padding(.bottom, 64)
                 }
-                .padding(.horizontal, 70)
+                
                 
             }
             

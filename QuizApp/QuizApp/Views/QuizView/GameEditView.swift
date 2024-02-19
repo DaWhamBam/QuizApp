@@ -25,7 +25,7 @@ struct GameEditView: View {
                     
                     Text("Category:")
                     
-                    Text(category)
+                    Text(categoryViewModel.selectedCategorie)
                         .font(.title2)
                         .bold()
                         .foregroundStyle(.black)
@@ -87,9 +87,6 @@ struct GameEditView: View {
                 .shadow(radius: 4, x: 0, y: 4)
                 .padding()
                 
-                
-                
-                
             }
             .background(Color("MainColor"))
             .toolbar {
@@ -110,10 +107,11 @@ struct GameEditView: View {
     
     
     @EnvironmentObject var questionViewModel: QuestionListViewModel
+    @EnvironmentObject var categoryViewModel: CategoryListViewModel
     
     @Binding var isPresented: Bool
     
-    let category: String
+   // let category: String
     @State private var amountSelected = 1
     @State private var amountOptions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50]
     
@@ -123,27 +121,28 @@ struct GameEditView: View {
     
     
     func categoryNumber() -> String {
+        let category = categoryViewModel.selectedCategorie
         if category == "General Knowledge" {
             return String(9)
-        } else if category == "Entertainment: Books" {
+        } else if category == "Books" {
             return String(10)
-        } else if category == "Entertainment: Film" {
+        } else if category == "Film" {
             return String(11)
-        } else if category == "Entertainment: Music" {
+        } else if category == "Music" {
             return String(12)
-        } else if category == "Entertainment: Musicals & Theatres" {
+        } else if category == "Musicals & Theatres" {
             return String(13)
-        } else if category == "Entertainment: Television" {
+        } else if category == "Television" {
             return String(14)
-        } else if category == "Entertainment: Video Games" {
+        } else if category == "Video Games" {
             return String(15)
-        } else if category == "Entertainment: Board Games" {
+        } else if category == "Board Games" {
             return String(16)
         } else if category == "Science & Nature" {
             return String(17)
-        } else if category == "Science: Coumputers" {
+        } else if category == "Computers" {
             return String(18)
-        } else if category == "Science: Mathematics" {
+        } else if category == "Mathematics" {
             return String(19)
         } else if category == "Mythology" {
             return String(20)
@@ -163,13 +162,13 @@ struct GameEditView: View {
             return String(27)
         } else if category == "Vehicles" {
             return String(28)
-        } else if category == "Entertainment: Comics" {
+        } else if category == "Comics" {
             return String(29)
         } else if category == "Science: Gadgets" {
             return String(30)
-        } else if category == "Entertainment: Japanese Anime & Manga" {
+        } else if category == "Japanese Anime & Manga" {
             return String(31)
-        } else if category == "Entertainment: Cartoon & Animations" {
+        } else if category == "Cartoon & Animations" {
             return String(32)
         } else {
             return ""
@@ -184,5 +183,5 @@ struct GameEditView: View {
 
 
 #Preview {
-    GameEditView(isPresented: .constant(false), category: "Book" )
+    GameEditView(isPresented: .constant(false))
 }
