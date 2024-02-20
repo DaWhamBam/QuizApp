@@ -24,7 +24,7 @@ struct QuizView: View {
                             .frame(alignment: .leading)
                             .padding(.leading, 16)
                         
-                        Text("124")
+                        Text(String(questionViewModel.rightQuestions.count * 10))
                             .frame(maxWidth: .infinity, alignment: .leading)
                     }
                     

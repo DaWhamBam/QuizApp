@@ -39,7 +39,7 @@ struct SettingsSheet: View {
             Spacer()
             
             Button(action: closeSheet) {
-                Text("Akualisieren")
+                Text("Update")
                     .padding(.bottom, 50)
                     .font(.title2)
             }

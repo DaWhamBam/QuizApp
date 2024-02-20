@@ -32,6 +32,8 @@ struct SettingView: View {
                 
 
             }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(Color("MainColor"))
             .navigationBarTitle("Settings", displayMode: .inline)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
@@ -60,6 +62,7 @@ struct SettingView: View {
             
             
         }
+        
         .sheet(isPresented: $shouldShowSheet) {
             SettingsSheet(isPresented: $shouldShowSheet, name: userViewModel.user!.name)
                 .interactiveDismissDisabled()

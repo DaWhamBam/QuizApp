@@ -32,10 +32,12 @@ struct ContentView: View {
                 
         }
         .navigationBarBackButtonHidden(true)
+        .environmentObject(categoryViewModel)
         
     }
     
     @State private var selectedTab: TabItem = .home
+    @StateObject private var categoryViewModel = CategoryListViewModel()
 }
 
 #Preview {

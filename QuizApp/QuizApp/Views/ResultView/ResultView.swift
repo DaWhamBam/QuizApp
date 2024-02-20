@@ -58,21 +58,7 @@ struct ResultView: View {
                 }
                 
                 Divider()
-                /*
-                ScrollView {
-                    
-                    ForEach(categoryViewModel.categories) { category in
-                        Text(category.name)
-                            .frame(maxWidth: .infinity)
-                            .foregroundColor(.white)
-                            .padding(12)
-                            .background(Color("FourthColor"))
-                            .clipShape(Capsule())
-                    }
-                    .padding(.bottom, 16)
-                    
-                }
-                 */
+                
             }
             .background(Color("MainColor"))
             .toolbar {

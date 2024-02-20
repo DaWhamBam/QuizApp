@@ -133,7 +133,7 @@ struct HomeView: View {
   
     
     @StateObject private var userViewModel = UserViewModel()
-    @StateObject private var categoryViewModel = CategoryListViewModel()
+    @EnvironmentObject private var categoryViewModel: CategoryListViewModel
     @Binding var tab: TabItem
     let columns = [GridItem(spacing: 15), GridItem(spacing: 15)]
     @State private var shouldShowRandomQuiz = false
